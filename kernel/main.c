@@ -20,6 +20,7 @@ main()
     kvminit();       // create kernel page table
     kvminithart();   // turn on paging
     procinit();      // process table
+    peterson_init(); // initialize locks[i].active, flags, turn
     trapinit();      // trap vectors
     trapinithart();  // install kernel trap vector
     plicinit();      // set up interrupt controller

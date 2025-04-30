@@ -36,3 +36,9 @@ entry("getpid");
 entry("sbrk");
 entry("sleep");
 entry("uptime");
+
+# Peterson‐lock syscalls
+entry("peterson_create");
+entry("peterson_acquire");
+entry("peterson_release");
+entry("peterson_destroy");
