@@ -23,12 +23,6 @@ char* sbrk(int);
 int sleep(int);
 int uptime(void);
 
-// Peterson lock system calls
-int peterson_create(void);
-int peterson_acquire(int lock_id, int role);
-int peterson_release(int lock_id, int role);
-int peterson_destroy(int lock_id);
-
 // ulib.c
 int stat(const char*, struct stat*);
 char* strcpy(char*, const char*);

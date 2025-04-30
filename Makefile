@@ -22,7 +22,6 @@ OBJS = \
   $K/fs.o \
   $K/log.o \
   $K/sleeplock.o \
-  $K/petersonlock.o \
   $K/file.o \
   $K/pipe.o \
   $K/exec.o \
@@ -133,8 +132,6 @@ UPROGS=\
 	$U/_grind\
 	$U/_wc\
 	$U/_zombie\
-	$U/_test_peterson\
-
 
 fs.img: mkfs/mkfs README $(UPROGS)
 	mkfs/mkfs fs.img README $(UPROGS)
