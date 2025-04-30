@@ -66,7 +66,9 @@ peterson_acquire(int lock_id, int role)
     
     // Wait until the other process is not interested in the lock and it's our turn
     while(locks[lock_id].flag[1-role] && locks[lock_id].turn == role) {
+        pop_off();
         yield();
+        push_off();
     }
     pop_off();
 
