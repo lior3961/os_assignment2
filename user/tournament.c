@@ -25,11 +25,19 @@ int main(int argc, char *argv[]) {
 
     // CRITICAL SECTION
     printf("Process %d (Tournament ID %d) entered critical section\n", getpid(), id);
-    sleep(1);  // Simulate work
 
     if (tournament_release() < 0) {
         printf("Process %d (ID %d): Failed to release lock\n", getpid(), id);
         exit(1);
+    }
+
+    // Only the parent process should wait for all children
+    if (id == 0) {
+        // Wait for all children to complete
+        for (int i = 1; i < num_processes; i++) {
+            wait(0);
+        }
+        printf("All processes have completed\n");
     }
 
     exit(0);
