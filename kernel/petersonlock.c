@@ -9,14 +9,14 @@
 #include "petersonlock.h"
 
 
-#define MAX_PETERSON_LOCKS 15
+#define MIN_PETERSON_LOCKS 15
 // Array of locks
-struct petersonlock locks[MAX_PETERSON_LOCKS];
+struct petersonlock locks[MIN_PETERSON_LOCKS];
 
 void
 peterson_init(void)
 {
-  for (int i = 0; i < MAX_PETERSON_LOCKS; i++) {
+  for (int i = 0; i < MIN_PETERSON_LOCKS; i++) {
     locks[i].active = 0;
     locks[i].flag[0] = 0;
     locks[i].flag[1] = 0;
@@ -29,7 +29,7 @@ peterson_init(void)
 int
 peterson_create(void)
 {
-  for (int i = 0; i < MAX_PETERSON_LOCKS; i++) {
+  for (int i = 0; i < MIN_PETERSON_LOCKS; i++) {
     if (__sync_lock_test_and_set(&locks[i].active, 1) == 0) {
       locks[i].lock_index = i;
       return i;
@@ -43,7 +43,7 @@ peterson_create(void)
 int
 peterson_acquire(int lock_id, int role)
 {
-    if (lock_id < 0 || lock_id >= MAX_PETERSON_LOCKS || (role != 0 && role != 1)) {
+    if (lock_id < 0 || lock_id >= MIN_PETERSON_LOCKS || (role != 0 && role != 1)) {
         return -1; // Invalid lock ID or role
     }
 
@@ -79,7 +79,7 @@ peterson_acquire(int lock_id, int role)
 int 
 peterson_release(int lock_id, int role)
 {
-    if (lock_id < 0 || lock_id >= MAX_PETERSON_LOCKS || (role != 0 && role != 1)) {
+    if (lock_id < 0 || lock_id >= MIN_PETERSON_LOCKS || (role != 0 && role != 1)) {
         return -1; // Invalid lock ID or role
     }
 
@@ -104,7 +104,7 @@ peterson_release(int lock_id, int role)
 int 
 peterson_destroy(int lock_id) 
 {
-    if (lock_id < 0 || lock_id >= MAX_PETERSON_LOCKS) {
+    if (lock_id < 0 || lock_id >= MIN_PETERSON_LOCKS) {
         return -1; // Invalid lock ID
     }
 
