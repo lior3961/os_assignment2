@@ -24,7 +24,8 @@ int main(int argc, char *argv[]) {
     }
 
     // CRITICAL SECTION
-    printf("Process %d (Tournament ID %d) entered critical section\n", getpid(), id);
+    printf("Process pid: %d (Tournament ID %d) entered critical section\n", getpid(), id);
+    sleep(3); // Simulate some work in the critical section
 
     if (tournament_release() < 0) {
         printf("Process %d (ID %d): Failed to release lock\n", getpid(), id);
